@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="/stylesheet/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-app">
+            <h2 class="text-3xl">Tasks<img src="images/icon.png"></h2>
+            <form action="/create" method="post">
+                <div class="row">
+                    <input class="Block px-3 py-2 bg-zinc-300 rounded-md w-full" type="text" id="input-box"
+                        placeholder="Add title here" name="title">
+                </div>
+                <div>
+                    <textarea class="Block px-5 py-2 resize-none bg-zinc-300 w-full outline-none rounded-md mt-2"
+                        placeholder="Write your task details" name="details"></textarea>
+                </div>
+                <input class="mt-2 bg-blue-400 rounded-md px-5 py-2" value="Create Task" type="submit">
+        </div>
+        </form>
+
+        <div class="tasks pt-10 flex flex-wrap gap-4">
+            <% if (files.length> 0){ %>
+                <% files.forEach(function(val){ %>
+                    <div class="task w-1/4 px-3 py-4 bg-white rounded-md">
+                        <h1 class="text-black text-2xl tracking-tighter"> <%=val %></h1>
+                        <div class="flex flex-col">
+                            <a class="text-blue-500 inline-block mt-3" href="/files/<%= val %>">Read more</a>
+                            <a class="pt-3" href="/edit/<%= val %>">Edit filename</a>
+                            <form action="/delete" method="Post" class="mt-2">
+                                <input type="hidden" name="filename" value="<%= val %>">
+                                <input class="mt-2 bg-blue-400 rounded-md px-2 py-2" value="Delete Task" type="submit">
+                            </form>
+
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="text-white px-10">No tasks yet.</div>
+                            <% } %>
+ 
+        </div>
+    </div>
+
+
+    <script src="/javascript/script.js"></script>
+</body>
+
+</html>
